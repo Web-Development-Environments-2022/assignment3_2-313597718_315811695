@@ -23,7 +23,7 @@ router.post("/Register", async (req, res, next) => {
     let users = [];
     users = await DButils.execQuery("SELECT username from users");
     let x = await DButils.execQuery(
-      "SELECT MAX(user_id) as id FROM hw3.users"
+      "SELECT MAX(user_id) as id FROM husers"
     );
     let maxid = x[0].id;
     maxid++;

@@ -255,7 +255,7 @@ async function getLast3(user_id) {
   //const user_id = req.session.user_id;
   // go to DB table "lastSeen" -> user_id,recipe_id,date-> filter all recipeID of this user_id-> order by date-> take the newest 3.
   let x = await DButils.execQuery(
-    `SELECT * FROM hw3.lastseen where user_id='${user_id}' ORDER BY date DESC LIMIT 3`
+    `SELECT * FROM lastseen where user_id='${user_id}' ORDER BY date DESC LIMIT 3`
   );
   for (let i = 0; i < Object.keys(x).length; i++) {
     threeLast.push(x[i].recipe_id);

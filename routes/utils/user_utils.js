@@ -8,7 +8,7 @@ const DButils = require("./DButils");
 
 async function markAsFavorite(user_id, recipe_id) {
   let x = await DButils.execQuery(
-    "SELECT recipeid as id FROM hw3.userfavrecpies"
+    "SELECT recipeid as id FROM userfavrecpies"
   );
   let all = [];
   console.log(all)
@@ -34,7 +34,7 @@ async function getFavoriteRecipes(user_id) {
 async function createRecipe(user_id, recpiesDetials) {
   console.log(recpiesDetials);
   let x = await DButils.execQuery(
-    "SELECT MAX(id) as id FROM hw3.userrecipes"
+    "SELECT MAX(id) as id FROM userrecipes"
   );
   let maxid = x[0].id;
   maxid++;
@@ -64,14 +64,14 @@ async function getFamily(user_id) {
 
 // returns all the created recipes by this user id
 async function addSeen(user_id, recipe_id) {
-  await DButils.execQuery(`INSERT INTO hw3.lastseen VALUES('${user_id}','${recipe_id}',NOW()) ON DUPLICATE KEY UPDATE date=NOW()`);
+  await DButils.execQuery(`INSERT INTO lastseen VALUES('${user_id}','${recipe_id}',NOW()) ON DUPLICATE KEY UPDATE date=NOW()`);
   //`insert into lastseen values ('${username}','${recipe_id}',NOW()) ON DUPLICATE KEY UPDATE time=NOW()`
 }
 
 // checks if the user watched the full recipe with this id
 async function checkSeen(user_id, recipe_id) {
   console.log("in check seen");
-  const ans = await DButils.execQuery(`SELECT * FROM hw3.lastseen WHERE user_id='${user_id}' AND recipe_id='${recipe_id}'`);
+  const ans = await DButils.execQuery(`SELECT * FROM lastseen WHERE user_id='${user_id}' AND recipe_id='${recipe_id}'`);
   console.log(ans)  //`insert into lastseen values ('${username}','${recipe_id}',NOW()) ON DUPLICATE KEY UPDATE time=NOW()`
   return ans;
 }
