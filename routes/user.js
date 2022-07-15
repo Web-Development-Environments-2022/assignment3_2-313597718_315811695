@@ -141,7 +141,7 @@ router.post("/createRecipe", async (req, res, next) => {
       req.session.user_id,
       recpiesDetials
     );
-    res.status(200).send(results);
+    res.status(200).send("recipe created");
   } catch (error) {
     next(error);
   }
